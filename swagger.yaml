@@ -1,0 +1,441 @@
+openapi: 3.0.0
+
+info:
+
+  title: Jobs-API
+
+  contact: {}
+
+  version: '1.0'
+
+servers:
+
+  - url: https://jobs-api-akj8.onrender.com/api/v1
+
+    variables: {}
+
+paths:
+
+  /auth/register:
+
+    post:
+
+      tags:
+
+        - Auth
+
+      summary: Register User
+
+      operationId: RegisterUser
+
+      parameters: []
+
+      requestBody:
+
+        description: ''
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: '#/components/schemas/RegisterUserRequest'
+
+                - example:
+
+                    name: john
+
+                    email: ss@gmail.com
+
+                    password: password
+
+            example:
+
+              name: john
+
+              email: ss@gmail.com
+
+              password: password
+
+        required: true
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+  /auth/login:
+
+    post:
+
+      tags:
+
+        - Auth
+
+      summary: Login User
+
+      operationId: LoginUser
+
+      parameters: []
+
+      requestBody:
+
+        description: ''
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: '#/components/schemas/LoginUserRequest'
+
+                - example:
+
+                    email: ss@gmail.com
+
+                    password: password
+
+            example:
+
+              email: ss@gmail.com
+
+              password: password
+
+        required: true
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+  /jobs:
+
+    post:
+
+      tags:
+
+        - Jobs
+
+      summary: Create Job
+
+      operationId: CreateJob
+
+      parameters:
+
+        - name: Authorization
+
+          in: header
+
+          description: ''
+
+          required: true
+
+          style: simple
+
+          schema:
+
+            type: string
+
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDBmNGMzMTg3ZTQ5N2E4ZmEzNzBjYTEiLCJpYXQiOjE2Nzg3MjcyODMsImV4cCI6MTY4MTMxOTI4M30.hNXTIK7hr0Rv4JdRSXiub4YV5SjezjqZ528OJgtiwzM
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+    get:
+
+      tags:
+
+        - Jobs
+
+      summary: Get Jobs
+
+      operationId: GetJobs
+
+      parameters: []
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security:
+
+        - bearer: []
+
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+
+    get:
+
+      tags:
+
+        - Jobs
+
+      summary: Get Job
+
+      operationId: GetJob
+
+      parameters: []
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security:
+
+        - bearer: []
+
+    patch:
+
+      tags:
+
+        - Jobs
+
+      summary: Update Job
+
+      operationId: UpdateJob
+
+      parameters: []
+
+      requestBody:
+
+        description: ''
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: '#/components/schemas/UpdateJobRequest'
+
+                - example:
+
+                    company: goo2gle2
+
+                    position: junior
+
+
+            example:
+
+              company: goo2gle2
+
+              position: junior
+
+
+        required: true
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security:
+
+        - bearer: []
+
+    delete:
+
+      tags:
+
+        - Jobs
+
+      summary: Delete Job
+
+      operationId: DeleteJob
+
+      parameters: []
+
+      responses:
+
+        '200':
+
+          description: ''
+
+          headers: {}
+
+      deprecated: false
+
+      security:
+
+        - bearer: []
+
+components:
+
+  schemas:
+
+    RegisterUserRequest:
+
+      title: RegisterUserRequest
+
+      required:
+
+        - name
+
+        - email
+
+        - password
+
+      type: object
+
+      properties:
+
+        name:
+
+          type: string
+
+        email:
+
+          type: string
+
+        password:
+
+          type: string
+
+      example:
+
+        name: john
+
+        email: ss@gmail.com
+
+        password: password
+
+    LoginUserRequest:
+
+      title: LoginUserRequest
+
+      required:
+
+        - email
+
+        - password
+
+      type: object
+
+      properties:
+
+        email:
+
+          type: string
+
+        password:
+
+          type: string
+
+      example:
+
+        email: ss@gmail.com
+
+        password: password
+
+    UpdateJobRequest:
+
+      title: UpdateJobRequest
+
+      required:
+
+        - company
+
+        - position
+
+      type: object
+
+      properties:
+
+        company:
+
+          type: string
+
+        position:
+
+          type: string
+
+
+      example:
+
+        company: goo2gle2
+
+        position: junior
+
+
+  securitySchemes:
+
+    apiKey:
+
+      type: apiKey
+
+      name: apikey
+
+      in: header
+
+    bearer:
+
+      type: http
+
+      scheme: bearer
+
+security: []
+
+tags:
+
+  - name: Auth
+
+    description: ''
+
+  - name: Jobs
+
+    description: ''
+
